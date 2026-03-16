@@ -1,0 +1,40 @@
+`timescale 1ns / 1ps
+
+module tb_and_gate;
+
+    reg a;
+    reg b;
+
+    wire and_gate_out;
+    wire or_gate_out;
+    wire not_gate_out;
+    wire xor_gate_out;
+    wire xnor_gate_out;
+    wire nand_gate_out;
+    wire nor_gate_out;
+
+    and_gate uut (
+        .a(a), 
+        .b(b), 
+        .and_gate_out(and_gate_out), 
+        .or_gate_out(or_gate_out), 
+        .not_gate_out(not_gate_out), 
+        .xor_gate_out(xor_gate_out), 
+        .xnor_gate_out(xnor_gate_out), 
+        .nand_gate_out(nand_gate_out), 
+        .nor_gate_out(nor_gate_out)
+    );
+
+    initial begin
+        $monitor("Time=%0t | a=%b b=%b | AND=%b OR=%b NOT(a)=%b XOR=%b XNOR=%b NAND=%b NOR=%b", 
+                 $time, a, b, and_gate_out, or_gate_out, not_gate_out, xor_gate_out, xnor_gate_out, nand_gate_out, nor_gate_out);
+
+        a = 0; b = 0;#10; 
+        a = 0; b = 1;#10; 
+        a = 1; b = 0;#10; 
+        a = 1; b = 1;#10; 
+
+        $finish;
+    end
+      
+endmodule
